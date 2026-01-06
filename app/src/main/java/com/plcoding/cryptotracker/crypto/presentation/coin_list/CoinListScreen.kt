@@ -1,0 +1,68 @@
+package com.plcoding.cryptotracker.crypto.presentation.coin_list
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.plcoding.cryptotracker.crypto.domain.Coin
+import com.plcoding.cryptotracker.crypto.presentation.coin_list.component.CoinListItem
+import com.plcoding.cryptotracker.crypto.presentation.coin_list.component.previewCoin
+import com.plcoding.cryptotracker.crypto.presentation.models.CoinUi
+import com.plcoding.cryptotracker.ui.theme.CryptoTrackerTheme
+
+@Composable
+fun CoinListScreen(
+    coinListState: CoinListState,
+    modifier: Modifier = Modifier
+) {
+    if (coinListState.isLoading) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
+                .fillMaxSize()
+        ) {
+            CircularProgressIndicator()
+        }
+    }else{
+        LazyColumn(
+            modifier = modifier
+        ) {
+            items(coinListState.coins) { coinUi  ->
+                CoinListItem(
+                    coinUi = coinUi,
+                    onClick = {},
+                    modifier = Modifier.fillMaxWidth()
+                )
+                HorizontalDivider()
+            }
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun CoinListScreenPreview() {
+    CryptoTrackerTheme {
+        CoinListScreen(
+            coinListState = CoinListState(
+                isLoading = false,
+                coins = (1..100).map {
+                    previewCoin.copy(id = it.toString())
+                }
+            ),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+        )
+    }
+}
