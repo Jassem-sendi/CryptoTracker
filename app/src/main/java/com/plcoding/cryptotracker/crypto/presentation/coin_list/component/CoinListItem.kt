@@ -21,13 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.cryptotracker.crypto.domain.Coin
 import com.plcoding.cryptotracker.crypto.presentation.models.CoinUi
-import com.plcoding.cryptotracker.crypto.presentation.models.toDisplayableCoinUi
+import com.plcoding.cryptotracker.crypto.presentation.models.toCoinUi
 import com.plcoding.cryptotracker.ui.theme.CryptoTrackerTheme
 
 @Composable
@@ -102,4 +101,4 @@ internal val previewCoin = Coin(
     marketCapUsd = 1_860_000_000_000.0,
     priceUsd = 93_325.0,
     changePercent24Hr = 0.78
-).toDisplayableCoinUi()
+).toCoinUi()
